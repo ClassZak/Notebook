@@ -49,5 +49,15 @@ namespace Notebook
                 this.InputField.Text=File.ReadAllText(openFileDialog.FileName);
             }
         }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Title = "Save a Text File";
+            saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+
+            if (saveFileDialog.ShowDialog() == true)
+                File.WriteAllText(saveFileDialog.FileName, this.InputField.Text);
+        }
     }
 }

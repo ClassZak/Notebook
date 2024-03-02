@@ -9,6 +9,7 @@
         Title="Блокнот" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="5"/>
             <RowDefinition Height="20"/>
             <RowDefinition Height="40*"/>
         </Grid.RowDefinitions>
@@ -20,13 +21,13 @@
         </Grid.ColumnDefinitions>
 
 
-        <TextBox x:Name="PathField" Grid.Column="1" IsReadOnly="True" Height="20"/>
-        <TextBox x:Name="InputField" Grid.Row="1" Grid.ColumnSpan="3"  Margin="10" AcceptsReturn="True" TextWrapping="NoWrap"/>
+        <TextBox x:Name="PathField"  Grid.Row="1" Grid.Column="1" IsReadOnly="True" Height="20"/>
+        <TextBox x:Name="InputField" Grid.Row="2" Grid.ColumnSpan="3"  Margin="10" AcceptsReturn="True" TextWrapping="NoWrap"/>
 
 
 
-        <Button Content="Сохранить" Width="65" Height="20"/>
-        <Button Content="Открыть"   Width="65" Height="20" Grid.Column="2" Click="Button_Click"/>
+        <Button Content="Сохранить" Width="65" Height="20" Grid.Row="1" Click="Button_Click_1"/>
+        <Button Content="Открыть"   Width="65" Height="20" Grid.Row="1" Grid.Column="2" Click="Button_Click"/>
 
     </Grid>
 </Window>
