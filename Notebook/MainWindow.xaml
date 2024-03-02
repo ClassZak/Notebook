@@ -5,8 +5,28 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Notebook"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        MinWidth="285" MinHeight="150"
+        Title="Блокнот" Height="450" Width="800">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="40*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="84"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="84"/>
+        </Grid.ColumnDefinitions>
+
+
+        <TextBox x:Name="PathField" Grid.Column="1" IsReadOnly="True" Height="20"/>
+        <TextBox x:Name="InputField" Grid.Row="1" Grid.ColumnSpan="3"  Margin="10" AcceptsReturn="True" TextWrapping="NoWrap"/>
+
+
+
+        <Button Content="Сохранить" Width="65" Height="20"/>
+        <Button Content="Открыть"   Width="65" Height="20" Grid.Column="2" Click="Button_Click"/>
+
     </Grid>
 </Window>
