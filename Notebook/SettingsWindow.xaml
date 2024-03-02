@@ -5,8 +5,107 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Notebook"
         mc:Ignorable="d"
-        Title="Настройки" Height="450" Width="800">
-    <Grid>
+        ResizeMode="NoResize"
         
+        Title="Настройки" Height="200" Width="400">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="200*"/>
+        </Grid.ColumnDefinitions>
+
+
+
+        <TextBlock
+            Margin="0,20,0,0" 
+            Height="20" Width="40" 
+            HorizontalAlignment="Left" VerticalAlignment="Top"
+        >
+        Размер
+        </TextBlock>
+        <TextBox 
+            Margin="40,20,0,0" 
+            Height="20" Width="40" 
+            InputScope="Number" 
+            MaxLength="4" 
+            HorizontalAlignment="Left" VerticalAlignment="Top"
+            Name="SizeTextBox"
+        />
+        <ComboBox Height="20" VerticalAlignment="Top" Name="FontMenu" SelectedIndex="0" SelectionChanged="FontMenu_SelectionChanged">
+            <ComboBoxItem>
+                Consolas
+            </ComboBoxItem>
+            <ComboBoxItem>
+                Impact
+            </ComboBoxItem>
+            <ComboBoxItem>
+                Arial
+            </ComboBoxItem>
+            <ComboBoxItem>
+                Wingdings
+            </ComboBoxItem>
+        </ComboBox>
+        <Slider 
+            Width="120" Height="20" 
+            HorizontalAlignment="Right"  VerticalAlignment="Top"
+            Margin="0,20" 
+            ValueChanged="Slider_ValueChanged"
+            Maximum="1023"
+            Minimum="8"
+        />
+        <TextBox 
+            IsReadOnly="True" 
+            xml:space="preserve" 
+            VerticalAlignment="Top" 
+            Height="144" 
+            Margin="0,40,0,0"
+            Name="TextSample"
+        >Съешь ещё этих мягких французских булок, да выпей же чаю
+The quick brown fox jumps over the lazy dog
+        </TextBox>
+
+
+
+
+
+        <Image 
+            Grid.Column="1"
+            Width="150" Height="120" 
+            VerticalAlignment="Top" HorizontalAlignment="Center"
+            Margin="0,20,0,0"
+            Name="BackgroundDemo"
+        />
+
+        <Rectangle 
+            Stroke="Black"
+            Grid.Column="1"
+            Width="150" Height="120" 
+            StrokeThickness="0.5" 
+            VerticalAlignment="Top" HorizontalAlignment="Center"
+            Margin="0,20"
+        />
+
+        <Line Stroke="Black" X1="200" Y1="0" X2="200" Y2="200" Visibility="Visible" StrokeThickness="0.5" />
+        <Line Stroke="Black" X1="0" Y1="0" X2="400" Y2="0" Visibility="Visible" StrokeThickness="0.5" Grid.ColumnSpan="2"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <Line X1="0" Y1="40" X2="200" Y2="40" Stroke="Black" StrokeThickness="0.5"/>
+        <Rectangle Width="200" Height="164" VerticalAlignment="Top" Margin="0,20,0,0" Stroke="Black" StrokeThickness="0.5"/>
+
+
     </Grid>
 </Window>

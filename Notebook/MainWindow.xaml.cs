@@ -15,7 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using System.Drawing;
 
 
 
@@ -37,7 +37,6 @@ namespace Notebook
             InitializeComponent();
 
             ImageBrush myBrush = new ImageBrush();
-            myBrush.TileMode=TileMode.FlipX;
             BitmapImage myBitmap = new BitmapImage(new Uri(Directory.GetCurrentDirectory().ToString()+ @"\resources\Russia.jpg"));
             myBrush.ImageSource = myBitmap;
             myBrush.TileMode = TileMode.Tile;
@@ -45,6 +44,10 @@ namespace Notebook
             myBrush.ViewportUnits = BrushMappingMode.Absolute;
 
             this.InputField.Background = myBrush;
+
+            SolidBrush brush = new SolidBrush(System.Drawing.Color.FromArgb(0));
+
+            
         }
 
         private void Load_Button_Click(object sender, RoutedEventArgs e)
@@ -73,9 +76,6 @@ namespace Notebook
         {
             SettingsWindow settingsWindow = new SettingsWindow();
             settingsWindow.ShowDialog();
-
-
-
         }
     }
 }
