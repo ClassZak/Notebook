@@ -69,5 +69,9 @@ namespace Notebook
             if (saveFileDialog.ShowDialog() == true)
                 File.WriteAllText(saveFileDialog.FileName, this.InputField.Text);
         }
+        private void Settings_Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
