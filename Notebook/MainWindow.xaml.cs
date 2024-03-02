@@ -38,7 +38,7 @@ namespace Notebook
 
             ImageBrush myBrush = new ImageBrush();
             myBrush.TileMode=TileMode.FlipX;
-            BitmapImage myBitmap = new BitmapImage(new Uri(@"Resources\Russia.jpg"));
+            BitmapImage myBitmap = new BitmapImage(new Uri(Directory.GetCurrentDirectory().ToString()+ @"\resources\Russia.jpg"));
             myBrush.ImageSource = myBitmap;
             myBrush.TileMode = TileMode.Tile;
             myBrush.Viewport = new Rect(0, 0, myBitmap.Width, myBitmap.Height);
