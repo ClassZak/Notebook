@@ -47,7 +47,7 @@ namespace Notebook
             this.InputField.Background = myBrush;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Load_Button_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             if ((bool)(openFileDialog.ShowDialog()))
@@ -60,7 +60,7 @@ namespace Notebook
             }
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void Save_Button_Click(object sender, RoutedEventArgs e)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Title = "Save a Text File";

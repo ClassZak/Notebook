@@ -27,8 +27,8 @@
 
 
 
-        <Button Content="Сохранить" Width="65" Height="20" Grid.Row="1" Grid.Column="1" Click="Button_Click_1"/>
-        <Button Content="Открыть"   Width="65" Height="20" Grid.Row="1" Grid.Column="2" Click="Button_Click"/>
+        <Button Content="Сохранить" Width="65" Height="20" Grid.Row="1" Grid.Column="1" Click="Save_Button_Click"/>
+        <Button Content="Открыть"   Width="65" Height="20" Grid.Row="1" Grid.Column="2" Click="Load_Button_Click"/>
 
     </Grid>
 </Window>
