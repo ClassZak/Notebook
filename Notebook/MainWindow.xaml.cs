@@ -35,6 +35,16 @@ namespace Notebook
         public MainWindow()
         {
             InitializeComponent();
+
+            ImageBrush myBrush = new ImageBrush();
+            myBrush.TileMode=TileMode.FlipX;
+            BitmapImage myBitmap = new BitmapImage(new Uri(@"Resources\Russia.jpg"));
+            myBrush.ImageSource = myBitmap;
+            myBrush.TileMode = TileMode.Tile;
+            myBrush.Viewport = new Rect(0, 0, myBitmap.Width, myBitmap.Height);
+            myBrush.ViewportUnits = BrushMappingMode.Absolute;
+
+            this.InputField.Background = myBrush;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
