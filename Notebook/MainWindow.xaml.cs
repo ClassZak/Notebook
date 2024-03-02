@@ -71,6 +71,10 @@ namespace Notebook
         }
         private void Settings_Button_Click(object sender, RoutedEventArgs e)
         {
+            SettingsWindow settingsWindow = new SettingsWindow();
+            settingsWindow.ShowDialog();
+
+
 
         }
     }

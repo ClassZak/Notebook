@@ -17,9 +17,9 @@ namespace Notebook
     /// <summary>
     /// Логика взаимодействия для Window1.xaml
     /// </summary>
-    public partial class Window1 : Window
+    public partial class SettingsWindow : Window
     {
-        public Window1()
+        public SettingsWindow()
         {
             InitializeComponent();
         }
