@@ -16,18 +16,18 @@
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="84"/>
-            <ColumnDefinition/>
             <ColumnDefinition Width="84"/>
+            <ColumnDefinition Width="84"/>
+            <ColumnDefinition Width="84*"/>
         </Grid.ColumnDefinitions>
 
 
-        <TextBox x:Name="PathField"  Grid.Row="1" Grid.Column="1" IsReadOnly="True" Height="20"/>
-        <TextBox x:Name="InputField" Grid.Row="2" Grid.ColumnSpan="3"  Margin="10" AcceptsReturn="True" TextWrapping="NoWrap"  />
+        <TextBox x:Name="PathField"  Grid.Row="1" Grid.Column="3" IsReadOnly="True" Height="20"/>
+        <TextBox x:Name="InputField" Grid.Row="2" Grid.ColumnSpan="4"  Margin="10" AcceptsReturn="True" TextWrapping="NoWrap"  />
 
 
 
-
-        <Button Content="Сохранить" Width="65" Height="20" Grid.Row="1" Click="Button_Click_1"/>
+        <Button Content="Сохранить" Width="65" Height="20" Grid.Row="1" Grid.Column="1" Click="Button_Click_1"/>
         <Button Content="Открыть"   Width="65" Height="20" Grid.Row="1" Grid.Column="2" Click="Button_Click"/>
 
     </Grid>
