@@ -27,7 +27,24 @@ namespace Notebook
         public SettingsWindow()
         {
             InitializeComponent();
-            //this.BackgroundDemo.Source= new BitmapImage(new Uri(Directory.GetCurrentDirectory().ToString() + @"\resources\Putin.jpg"));
+            LoadColorsForComboBox();
+            this.SizeTextBox.Text = this.TextSample.FontSize.ToString();
+        }
+
+        private void LoadColorsForComboBox()
+        {
+            foreach (var prop in typeof(System.Windows.Media.Colors).GetProperties())
+            {
+                System.Windows.Media.Color color = 
+                    (System.Windows.Media.Color)prop.GetValue(null, null);
+                ColorComboBox.Items.Add
+                    (prop.Name);
+                BackgroundColorComboBox.Items.Add
+                    (prop.Name);
+            }
+
+            this.ColorComboBox.SelectedItem = "Black";
+            this.BackgroundColorComboBox.SelectedItem = "White";
         }
 
         private void FontMenu_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -114,12 +131,11 @@ namespace Notebook
                 }
                 else
                 {
-                        ImageBrush imageBrush = new ImageBrush();
-                        BitmapImage image = new BitmapImage(new Uri(PathInfo.Text));
-                        imageBrush.ImageSource = image;
+                    ImageBrush imageBrush = new ImageBrush();
+                    BitmapImage image = new BitmapImage(new Uri(PathInfo.Text));
+                    imageBrush.ImageSource = image;
 
-                        this.Sketch.Fill = imageBrush;
-                    
+                    this.Sketch.Fill = imageBrush;
                 }
             }
             catch(Exception ex)
@@ -127,6 +143,20 @@ namespace Notebook
                 MessageBox.Show(ex.Message,"Ошибка!",MessageBoxButton.OK, MessageBoxImage.Error);
             }
             
+        }
+
+        private void ColorComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string colorString = ((ComboBox)(sender)).SelectedValue.ToString();
+            var color = (System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString(colorString);
+            this.TextSample.Foreground = new SolidColorBrush(color);
+        }
+
+        private void BackgroundColorComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string colorString = ((ComboBox)(sender)).SelectedValue.ToString();
+            var color = (System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString(colorString);
+            this.TextSample.Background = new SolidColorBrush(color);
         }
     }
 }
