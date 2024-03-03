@@ -39,15 +39,11 @@ namespace Notebook
             ImageBrush myBrush = new ImageBrush();
             BitmapImage myBitmap = new BitmapImage(new Uri(Directory.GetCurrentDirectory().ToString()+ @"\resources\Russia.jpg"));
             myBrush.ImageSource = myBitmap;
-            myBrush.TileMode = TileMode.Tile;
-            myBrush.Viewport = new Rect(0, 0, myBitmap.Width, myBitmap.Height);
-            myBrush.ViewportUnits = BrushMappingMode.Absolute;
+            //myBrush.TileMode = TileMode.Tile;
+            //myBrush.Viewport = new Rect(0, 0, myBitmap.Width, myBitmap.Height);
+            //myBrush.ViewportUnits = BrushMappingMode.Absolute;
 
             this.InputField.Background = myBrush;
-
-            SolidBrush brush = new SolidBrush(System.Drawing.Color.FromArgb(0));
-
-            
         }
 
         private void Load_Button_Click(object sender, RoutedEventArgs e)

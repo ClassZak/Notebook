@@ -5,33 +5,50 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Notebook"
         mc:Ignorable="d"
-        ResizeMode="NoResize"
+        ResizeMode="CanResize"
         
-        Title="Настройки" Height="200" Width="400">
+        Title="Настройки" Height="200" Width="400"
+        MinHeight="200" MinWidth="400"
+        >
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="40"/>
+            <ColumnDefinition Width="40"/>
+            <ColumnDefinition Width="140"/>
             <ColumnDefinition Width="200*"/>
         </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="340*"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
 
 
 
         <TextBlock
-            Margin="0,20,0,0" 
-            Height="20" Width="40" 
-            HorizontalAlignment="Left" VerticalAlignment="Top"
+            Grid.Row="1"
+            Grid.Column="0"
+            Height="20"
         >
         Размер
         </TextBlock>
         <TextBox 
-            Margin="40,20,0,0" 
-            Height="20" Width="40" 
+            Height="20"
             InputScope="Number" 
-            MaxLength="4" 
-            HorizontalAlignment="Left" VerticalAlignment="Top"
+            MaxLength="2" 
+            Grid.Column="1"
+            Grid.Row="1"
             Name="SizeTextBox"
+            TextChanged="SizeTextBox_TextChanged"
         />
-        <ComboBox Height="20" VerticalAlignment="Top" Name="FontMenu" SelectedIndex="0" SelectionChanged="FontMenu_SelectionChanged">
+        <ComboBox 
+            Height="20"
+            Name="FontMenu" 
+            SelectedIndex="0" 
+            SelectionChanged="FontMenu_SelectionChanged"
+            Grid.ColumnSpan="3"
+        >
             <ComboBoxItem>
                 Consolas
             </ComboBoxItem>
@@ -46,66 +63,61 @@
             </ComboBoxItem>
         </ComboBox>
         <Slider 
-            Width="120" Height="20" 
-            HorizontalAlignment="Right"  VerticalAlignment="Top"
-            Margin="0,20" 
             ValueChanged="Slider_ValueChanged"
-            Maximum="1023"
-            Minimum="8"
+            Minimum="2"
+            Maximum="96"
+            Value="8"
+            Grid.Column="2"
+            Grid.Row="1"
+            Height="20"
         />
         <TextBox 
-            IsReadOnly="True" 
-            xml:space="preserve" 
-            VerticalAlignment="Top" 
-            Height="144" 
-            Margin="0,40,0,0"
+            IsReadOnly="True"
+            xml:space="preserve"
+            TextWrapping="Wrap"
+            Grid.Row="2"
+            Grid.RowSpan="2"
+            Grid.ColumnSpan="3"
             Name="TextSample"
-        >Съешь ещё этих мягких французских булок, да выпей же чаю
-The quick brown fox jumps over the lazy dog
-        </TextBox>
+            Text="Съешь ещё этих мягких французских булок, да выпей же чаю
+            The quick brown fox jumps over the lazy dog
+            1234567890-=+/*!@#$%^&amp;;:&gt;&lt;&quot;'\|/`~s()_"
+        />
+        
+        
+        <Button 
+            Grid.Column="3" Grid.Row="3" 
+            HorizontalAlignment="Left" 
+            Width="60" 
+            Name="OpenImageButton"
+            Content="Открыть" Click="OpenImageButton_Click"
+            />
+        <CheckBox 
+            Grid.Column="3" Grid.Row="3"
+            Content="Замостить" 
+            Checked="PaveCheckBox_Checked"
+            Unchecked="PaveCheckBox_Checked"
+            Name="PaveCheckBox"
+            Margin="60,0,0,0"/>
+        <TextBox
+            Grid.Column="3" Grid.Row="3"
+            Name="PathInfo"
+            Margin="160,0,0,0"
+            IsReadOnly="True"
+            />
+        
+        <Rectangle Grid.Column="3" Grid.RowSpan="3" Stroke="Gray" Name="Sketch"/>
+        
+        
 
 
-
-
-
-        <Image 
-            Grid.Column="1"
-            Width="150" Height="120" 
-            VerticalAlignment="Top" HorizontalAlignment="Center"
-            Margin="0,20,0,0"
+    <!--<Image 
+            Grid.Column="3"
+            Grid.Row="0"
+            Grid.RowSpan="3"
+            VerticalAlignment="Top"
             Name="BackgroundDemo"
-        />
-
-        <Rectangle 
-            Stroke="Black"
-            Grid.Column="1"
-            Width="150" Height="120" 
-            StrokeThickness="0.5" 
-            VerticalAlignment="Top" HorizontalAlignment="Center"
-            Margin="0,20"
-        />
-
-        <Line Stroke="Black" X1="200" Y1="0" X2="200" Y2="200" Visibility="Visible" StrokeThickness="0.5" />
-        <Line Stroke="Black" X1="0" Y1="0" X2="400" Y2="0" Visibility="Visible" StrokeThickness="0.5" Grid.ColumnSpan="2"/>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        <Line X1="0" Y1="40" X2="200" Y2="40" Stroke="Black" StrokeThickness="0.5"/>
-        <Rectangle Width="200" Height="164" VerticalAlignment="Top" Margin="0,20,0,0" Stroke="Black" StrokeThickness="0.5"/>
-
-
+        />-->
+        
     </Grid>
 </Window>

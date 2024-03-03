@@ -8,12 +8,12 @@ using System.Windows.Media;
 
 namespace Notebook
 {
-    internal struct Settings
+    public struct Settings
     {
         public class FontSettings
         {
             public System.Windows.Media.FontFamily fontFamily;
-            public float FontScale;
+            public uint FontScale;
         }
         public class ImageSetting
         {

@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -21,11 +23,11 @@ namespace Notebook
     /// </summary>
     public partial class SettingsWindow : Window
     {
-        
+        static public Settings settings;
         public SettingsWindow()
         {
             InitializeComponent();
-            this.BackgroundDemo.Source= new BitmapImage(new Uri(Directory.GetCurrentDirectory().ToString() + @"\resources\Russia.jpg"));
+            //this.BackgroundDemo.Source= new BitmapImage(new Uri(Directory.GetCurrentDirectory().ToString() + @"\resources\Putin.jpg"));
         }
 
         private void FontMenu_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -55,7 +57,76 @@ namespace Notebook
                 TextSample.FontSize = (uint)((Slider)(sender)).Value;
                 this.SizeTextBox.Text= ((uint)((Slider)(sender)).Value).ToString();
             }
-                
+        }
+
+        private void SizeTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (this.IsInitialized)
+            {
+                try
+                {
+                    byte fontSize=Convert.ToByte(this.SizeTextBox.Text);
+                    if (fontSize >= 2 && fontSize <= 96)
+                        this.TextSample.FontSize = fontSize;
+                }
+                catch(Exception) { }
+            }
+        }
+
+        private void OpenImageButton_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            if((bool)openFileDialog.ShowDialog())
+            {
+                string FullName=openFileDialog.FileName;
+                if(FullName.EndsWith(".png") || FullName.EndsWith(".jpg") || FullName.EndsWith(".bmp"))
+                {
+                    ImageBrush imageBrush = new ImageBrush();
+                    BitmapImage image = new BitmapImage(new Uri(FullName));
+                    imageBrush.ImageSource = image;
+                    imageBrush.Viewport=new Rect(0,0,image.Width,image.Height);
+                    imageBrush.ViewportUnits = BrushMappingMode.Absolute;
+
+                    this.Sketch.Fill= imageBrush;
+                    this.PathInfo.Text=FullName;
+                }
+                else
+                    MessageBox.Show("Неверный формат!","Ошибка!",MessageBoxButton.OK,MessageBoxImage.Error);
+            }
+            PaveCheckBox_Checked(null, null);
+        }
+
+        private void PaveCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (this.PathInfo.Text!=null)
+                if((bool)this.PaveCheckBox.IsChecked)
+                {
+                    ImageBrush imageBrush = new ImageBrush();
+                    BitmapImage image = new BitmapImage(new Uri(this.PathInfo.Text));
+                    imageBrush.ImageSource = image;
+                    imageBrush.TileMode = TileMode.Tile;
+                    imageBrush.Viewport = new Rect(0, 0, image.Width, image.Height);
+                    imageBrush.ViewportUnits = BrushMappingMode.Absolute;
+
+                    this.Sketch.Fill = imageBrush;
+                }
+                else
+                {
+                        ImageBrush imageBrush = new ImageBrush();
+                        BitmapImage image = new BitmapImage(new Uri(PathInfo.Text));
+                        imageBrush.ImageSource = image;
+
+                        this.Sketch.Fill = imageBrush;
+                    
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message,"Ошибка!",MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            
         }
     }
 }
