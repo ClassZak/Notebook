@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:Notebook"
         mc:Ignorable="d"
         ResizeMode="CanResize"
+        Closing="Window_Closing"
         
         Title="Настройки" Height="200" Width="400"
         MinHeight="200" MinWidth="400"
@@ -44,8 +45,7 @@
         />
         <ComboBox 
             Height="20"
-            Name="FontMenu" 
-            SelectedIndex="0" 
+            Name="FontMenu"
             SelectionChanged="FontMenu_SelectionChanged"
         >
             <ComboBoxItem>
@@ -117,8 +117,23 @@
         
         
         <TextBlock Text="Фон" Grid.Row="4"/>
-        <RadioButton Content="Изображение" Grid.Row="4" Margin="30,0,0,0" GroupName="BackgroundTypeGroup"/>
-        <RadioButton Content="Цвет" Grid.Row="4" Margin="140,0,0,0" GroupName="BackgroundTypeGroup" IsChecked="True"/>
+        <RadioButton 
+            Content="Изображение"
+            Grid.Row="4" 
+            Margin="30,0,0,0" 
+            GroupName="BackgroundTypeGroup"
+            Name="ImageRadio"
+            Checked="RadioButtonImageBrush_Checked"
+        />
+        <RadioButton 
+            Content="Цвет" 
+            Grid.Row="4"
+            Margin="140,0,0,0"
+            GroupName="BackgroundTypeGroup" 
+            Name="SolidBrusnRadio"
+            Checked="RadioButtonSolidBrush_Checked"
+            IsChecked="True"
+        />
         
         
         

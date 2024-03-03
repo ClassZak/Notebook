@@ -32,18 +32,23 @@ namespace Notebook
     public partial class MainWindow : Window
     {
         const string MAIN_TITLE = "Блокнот";
+        public static Settings settings = new Settings();
+
         public MainWindow()
         {
             InitializeComponent();
+            UpdateElementSettings();
+        }
 
-            ImageBrush myBrush = new ImageBrush();
-            BitmapImage myBitmap = new BitmapImage(new Uri(Directory.GetCurrentDirectory().ToString()+ @"\resources\Russia.jpg"));
-            myBrush.ImageSource = myBitmap;
-            //myBrush.TileMode = TileMode.Tile;
-            //myBrush.Viewport = new Rect(0, 0, myBitmap.Width, myBitmap.Height);
-            //myBrush.ViewportUnits = BrushMappingMode.Absolute;
-
-            this.InputField.Background = myBrush;
+        void UpdateElementSettings()
+        {
+            this.InputField.FontSize=settings.fontScale;
+            this.InputField.Foreground=settings.foreground;
+            this.InputField.FontFamily=settings.fontFamily;
+            if (settings.IsImageBrush)
+                this.InputField.Background = settings.imageBackground;
+            else
+                this.InputField.Background = settings.solidBackground;
         }
 
         private void Load_Button_Click(object sender, RoutedEventArgs e)
@@ -59,6 +64,7 @@ namespace Notebook
             }
         }
 
+
         private void Save_Button_Click(object sender, RoutedEventArgs e)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
@@ -70,8 +76,12 @@ namespace Notebook
         }
         private void Settings_Button_Click(object sender, RoutedEventArgs e)
         {
+            SettingsWindow.settings = settings;
             SettingsWindow settingsWindow = new SettingsWindow();
             settingsWindow.ShowDialog();
+            settings = SettingsWindow.settings;
+
+            UpdateElementSettings();
         }
     }
 }

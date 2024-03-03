@@ -23,13 +23,35 @@ namespace Notebook
     /// </summary>
     public partial class SettingsWindow : Window
     {
-        static public Settings settings;
+        public static Settings settings = new Settings();
+
         public SettingsWindow()
         {
             InitializeComponent();
             LoadColorsForComboBox();
+            EnableSettings();
             this.SizeTextBox.Text = this.TextSample.FontSize.ToString();
         }
+
+
+
+        private void EnableSettings()
+        {
+            this.Sketch.Fill=settings.imageBackground;
+            this.TextSample.Foreground=settings.foreground;
+            this.TextSample.FontFamily=settings.fontFamily;
+            this.TextSample.FontSize=settings.fontScale;
+            this.TextSample.Background=settings.solidBackground;
+
+            if(settings.IsImageBrush)
+                this.ImageRadio.IsChecked=true;
+            else
+                this.SolidBrusnRadio.IsChecked = true;
+
+        }
+
+
+
 
         private void LoadColorsForComboBox()
         {
@@ -42,9 +64,6 @@ namespace Notebook
                 BackgroundColorComboBox.Items.Add
                     (prop.Name);
             }
-
-            this.ColorComboBox.SelectedItem = "Black";
-            this.BackgroundColorComboBox.SelectedItem = "White";
         }
 
         private void FontMenu_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -73,6 +92,7 @@ namespace Notebook
             {
                 TextSample.FontSize = (uint)((Slider)(sender)).Value;
                 this.SizeTextBox.Text= ((uint)((Slider)(sender)).Value).ToString();
+                settings.fontScale = (uint)TextSample.FontSize;
             }
         }
 
@@ -84,11 +104,17 @@ namespace Notebook
                 {
                     byte fontSize=Convert.ToByte(this.SizeTextBox.Text);
                     if (fontSize >= 2 && fontSize <= 96)
+                    {
                         this.TextSample.FontSize = fontSize;
+                        settings.fontScale=fontSize;
+                    }
+                        
                 }
                 catch(Exception) { }
             }
         }
+
+
 
         private void OpenImageButton_Click(object sender, RoutedEventArgs e)
         {
@@ -118,45 +144,74 @@ namespace Notebook
             try
             {
                 if (this.PathInfo.Text!=null)
-                if((bool)this.PaveCheckBox.IsChecked)
                 {
-                    ImageBrush imageBrush = new ImageBrush();
-                    BitmapImage image = new BitmapImage(new Uri(this.PathInfo.Text));
-                    imageBrush.ImageSource = image;
-                    imageBrush.TileMode = TileMode.Tile;
-                    imageBrush.Viewport = new Rect(0, 0, image.Width, image.Height);
-                    imageBrush.ViewportUnits = BrushMappingMode.Absolute;
+                    if((bool)this.PaveCheckBox.IsChecked)
+                    {
+                        ImageBrush imageBrush = new ImageBrush();
+                        BitmapImage image = new BitmapImage(new Uri(this.PathInfo.Text));
+                        imageBrush.ImageSource = image;
+                        imageBrush.TileMode = TileMode.Tile;
+                        imageBrush.Viewport = new Rect(0, 0, image.Width, image.Height);
+                        imageBrush.ViewportUnits = BrushMappingMode.Absolute;
 
-                    this.Sketch.Fill = imageBrush;
-                }
-                else
-                {
-                    ImageBrush imageBrush = new ImageBrush();
-                    BitmapImage image = new BitmapImage(new Uri(PathInfo.Text));
-                    imageBrush.ImageSource = image;
+                        this.Sketch.Fill = imageBrush;
+                    }
+                    else
+                    {
+                        ImageBrush imageBrush = new ImageBrush();
+                        BitmapImage image = new BitmapImage(new Uri(PathInfo.Text));
+                        imageBrush.ImageSource = image;
 
-                    this.Sketch.Fill = imageBrush;
+                        this.Sketch.Fill = imageBrush;
+                    }
+                    settings.imageBackground = this.Sketch.Fill;
                 }
+                
             }
             catch(Exception ex)
             {
                 MessageBox.Show(ex.Message,"Ошибка!",MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            
         }
+
 
         private void ColorComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             string colorString = ((ComboBox)(sender)).SelectedValue.ToString();
             var color = (System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString(colorString);
             this.TextSample.Foreground = new SolidColorBrush(color);
+            if(settings!=null)
+            settings.foreground= new SolidColorBrush(color);
         }
-
         private void BackgroundColorComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             string colorString = ((ComboBox)(sender)).SelectedValue.ToString();
             var color = (System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString(colorString);
             this.TextSample.Background = new SolidColorBrush(color);
+            if (settings != null)
+                settings.solidBackground = new SolidColorBrush(color);
+        }
+
+
+
+        private void RadioButtonImageBrush_Checked(object sender, RoutedEventArgs e)
+        {
+            if (settings != null)
+                settings.IsImageBrush = true;
+        }
+        private void RadioButtonSolidBrush_Checked(object sender, RoutedEventArgs e)
+        {
+            if(settings!=null)
+                settings.IsImageBrush = false;
+        }
+
+
+
+
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            settings.IsImageBrush=(bool)this.ImageRadio.IsChecked;
         }
     }
 }

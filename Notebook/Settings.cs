@@ -8,23 +8,24 @@ using System.Windows.Media;
 
 namespace Notebook
 {
-    public struct Settings
+    public class Settings
     {
-        public class FontSettings
-        {
-            public System.Windows.Media.FontFamily fontFamily;
-            public uint FontScale;
-        }
-        public class ImageSetting
-        {
-            public TileMode tileMode = TileMode.None;
-            public string ImageFullName = null;
+        public System.Windows.Media.FontFamily fontFamily;
+        public uint fontScale;
+        public System.Windows.Media.Brush foreground;
+        public System.Windows.Media.Brush imageBackground;
+        public System.Windows.Media.Brush solidBackground;
 
-            public bool ImageDrawing = false;
-            public SolidBrush brush = null;
-        }
-        static public FontSettings fontSettings;
-        static public ImageSetting imageSetting;
+        public bool IsImageBrush = false;
 
+        public Settings()
+        {
+            fontFamily = new System.Windows.Media.FontFamily("Consolas");
+            fontScale = 12;
+            foreground = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(0,0,0));
+            solidBackground = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(255,255,255));
+
+            IsImageBrush = false;
+        }
     }
 }
