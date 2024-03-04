@@ -71,18 +71,8 @@
             Grid.Row="1"
             Height="20"
         />
-        <TextBox 
-            IsReadOnly="True"
-            xml:space="preserve"
-            TextWrapping="Wrap"
-            Grid.Row="3"
-            Name="TextSample"
-            Text="Съешь ещё этих мягких французских булок, да выпей же чаю
-            The quick brown fox jumps over the lazy dog
-            1234567890-=+/*!@#$%^&amp;;:&gt;&lt;&quot;'\|/`~s()_"
-        />
-        
-        
+
+
         <TextBlock
             Grid.Row="2"
             Width="40"
@@ -94,9 +84,9 @@
             HorizontalAlignment="Left" Text="Фон"
             Margin="100,0,0,0"
         />
-        
-        
-        
+
+
+
         <ComboBox 
             Grid.Row="2"
             Width="60"
@@ -113,10 +103,10 @@
             Name="BackgroundColorComboBox"
             SelectionChanged="BackgroundColorComboBox_SelectionChanged"
         />
-        
-        
-        
-        <TextBlock Text="Фон" Grid.Row="4"/>
+
+
+
+        <TextBlock Text="Фон:" Grid.Row="4"/>
         <RadioButton 
             Content="Изображение"
             Grid.Row="4" 
@@ -134,20 +124,20 @@
             Checked="RadioButtonSolidBrush_Checked"
             IsChecked="True"
         />
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+
+
+
+
+
+
+
+
+
+
+
+
         <Button 
-            Grid.Column="3" Grid.Row="4" 
+            Grid.Column="1" Grid.Row="4" 
             HorizontalAlignment="Left" 
             Width="60" 
             Name="OpenImageButton"
@@ -166,7 +156,21 @@
             Margin="160,0,0,0"
             IsReadOnly="True"
             />
+
+
+        <TextBox 
+            Grid.Column="3" 
+            Grid.RowSpan="4" 
+            Name="Sketch"
+            
+            IsReadOnly="True"
+            xml:space="preserve"
+            TextWrapping="Wrap"
+>Съешь ещё этих мягких французских булок, да выпей же чаю
+The quick brown fox jumps over the lazy dog
+1234567890-=+/*!@#$%^&amp;;:&gt;&lt;&quot;'\|/`~s()_</TextBox>
         
-        <Rectangle Grid.Column="3" Grid.RowSpan="4" Stroke="Gray" Name="Sketch"/>
+        
+        <Rectangle Grid.Column="3" Grid.RowSpan="4" Stroke="Gray"/>
     </Grid>
 </Window>
