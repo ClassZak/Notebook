@@ -66,7 +66,9 @@ namespace Notebook
                 this.SolidBrusnRadio.IsChecked = true;
                 this.Sketch.Background=settings.solidBackground;
             }
-            this.PaveCheckBox.IsChecked = settings.IsStretch;
+            this.PaveCheckBox.IsChecked = !settings.IsStretch;
+            if(settings.imagePath.Length > 0)
+                this.PathInfo.Text=settings.imagePath;
         }
 
 
@@ -169,6 +171,7 @@ namespace Notebook
 
                     this.Sketch.Background = imageBrush;
                     this.PathInfo.Text = FullName;
+                    settings.imagePath=FullName;
                     succesSelected = true;
                 }
                 else
@@ -237,7 +240,7 @@ namespace Notebook
                             this.Sketch.Background = imageBrush;
                         }
                     }
-                    settings.IsStretch = (bool)this.PaveCheckBox.IsChecked;
+                    settings.IsStretch = !(bool)this.PaveCheckBox.IsChecked;
                     settings.imageBackground = this.Sketch.Background;
                 }
             }

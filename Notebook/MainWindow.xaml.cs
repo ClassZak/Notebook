@@ -83,5 +83,10 @@ namespace Notebook
 
             UpdateElementSettings();
         }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            settings.SaveSettings();
+        }
     }
 }

@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Notebook"
         mc:Ignorable="d"
+        Closing="Window_Closing"
         MinWidth="285" MinHeight="150"
         Title="Блокнот" Height="450" Width="800">
     <Grid>
