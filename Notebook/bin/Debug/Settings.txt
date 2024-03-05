@@ -1,0 +1,7 @@
+Consolas
+12
+#FF98FB98
+resources\PutinAndTacker.jpg
+#FF8A2BE2
+False
+False
