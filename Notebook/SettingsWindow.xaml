@@ -63,6 +63,7 @@
         </ComboBox>
         <Slider 
             ValueChanged="Slider_ValueChanged"
+            x:Name="SizeSlider"
             Minimum="2"
             Maximum="96"
             Value="8"

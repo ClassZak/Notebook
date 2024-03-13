@@ -69,6 +69,7 @@ namespace Notebook
             this.PaveCheckBox.IsChecked = !settings.IsStretch;
             if(settings.imagePath.Length > 0)
                 this.PathInfo.Text=settings.imagePath;
+            this.SizeSlider.Value = settings.fontScale;
         }
 
 
@@ -132,8 +133,8 @@ namespace Notebook
                     {
                         this.Sketch.FontSize = fontSize;
                         settings.fontScale=fontSize;
+                        this.SizeSlider.Value = fontSize;
                     }
-                        
                 }
                 catch(Exception) { }
             }
