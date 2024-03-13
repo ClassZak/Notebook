@@ -80,8 +80,6 @@ namespace Notebook
         {
             foreach (var prop in typeof(System.Windows.Media.Colors).GetProperties())
             {
-                System.Windows.Media.Color color = 
-                    (System.Windows.Media.Color)prop.GetValue(null, null);
                 ColorComboBox.Items.Add
                     (prop.Name);
                 BackgroundColorComboBox.Items.Add
@@ -148,13 +146,12 @@ namespace Notebook
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Изображения(*.png,*.jpg,*.bmp)|*.png;*.jpg;*.bmp";
 
-
             bool succesSelected = false;
             while (!succesSelected)
             if ((bool)openFileDialog.ShowDialog())
             {
                 string FullName = openFileDialog.FileName;
-                if (FullName.EndsWith(".png") || FullName.EndsWith(".jpg") || FullName.EndsWith(".bmp"))
+                try
                 {
                     ImageBrush imageBrush = new ImageBrush();
                     BitmapImage image = new BitmapImage(new Uri(FullName));
@@ -174,17 +171,20 @@ namespace Notebook
 
                     this.Sketch.Background = imageBrush;
                     this.PathInfo.Text = FullName;
-                    settings.imagePath=FullName;
+                    settings.imagePath = FullName;
                     succesSelected = true;
+                    this.ImageRadio.IsChecked = true;
                 }
-                else
-                    MessageBox.Show("Неверный формат!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
+                    throw;
+                }
             }
             else
             {
                 if(settings.imageBackground==null)
                 this.SolidBrusnRadio.IsChecked = true;
-                succesSelected = true;
                 return;
             }
 
