@@ -65,7 +65,7 @@ namespace Notebook
             openFileDialog.Filter = 
                 "Текстовые файлы(*.txt)|*.txt|"+
                 "Все файлы(*.*)|*.*|"+
-                "C/C++(*.c,*.cpp,*.h,*.hpp,*.hxx,*.cxx)|*.c,*.cpp,*.h,*.hpp,*.hxx,*.cxx|"+
+                "C/C++(*.c,*.cpp,*.h,*.hpp,*.hxx,*.cxx)|*.c;*.cpp;*.h;*.hpp;*.hxx;*.cxx|"+
                 "C#(*.cs)|*.cs";
             if ((bool)(openFileDialog.ShowDialog()))
             {
@@ -96,9 +96,9 @@ namespace Notebook
             saveFileDialog.Filter =
                 "Текстовые файлы(*.txt)|*.txt|" +
                 "Все файлы(*.*)|*.*|" +
-                "C/C++(*.c,*.cpp,*.h,*.hpp,*.hxx,*.cxx)|*.c,*.cpp,*.h,*.hpp,*.hxx,*.cxx|" +
+                "C/C++(*.c,*.cpp,*.h,*.hpp,*.hxx,*.cxx)|*.c;*.cpp;*.h;*.hpp;*.hxx;*.cxx|" +
                 "C#(*.cs)|*.cs";
-            saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            saveFileDialog.InitialDirectory = Directory.GetCurrentDirectory();
 
             if (saveFileDialog.ShowDialog() == true)
                 File.WriteAllText(saveFileDialog.FileName, this.InputField.Text);

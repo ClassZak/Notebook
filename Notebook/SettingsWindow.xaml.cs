@@ -12,6 +12,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
@@ -145,8 +146,9 @@ namespace Notebook
         private void OpenImageButton_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Изображения(*.png,*.jpg,*.bmp)|*.png;*.jpg;*.bmp";
 
-            
+
             bool succesSelected = false;
             while (!succesSelected)
             if ((bool)openFileDialog.ShowDialog())
@@ -180,6 +182,7 @@ namespace Notebook
             }
             else
             {
+                if(settings.imageBackground==null)
                 this.SolidBrusnRadio.IsChecked = true;
                 succesSelected = true;
                 return;
