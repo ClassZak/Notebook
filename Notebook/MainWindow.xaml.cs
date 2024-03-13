@@ -25,10 +25,6 @@ namespace Notebook
     /// Логика взаимодействия для MainWindow.xaml
     /// </summary>
     /// 
-
-    
-    
-
     public partial class MainWindow : Window
     {
         const string MAIN_TITLE = "Блокнот";
@@ -53,7 +49,24 @@ namespace Notebook
 
         private void Load_Button_Click(object sender, RoutedEventArgs e)
         {
+            if (
+                    MessageBox.Show
+                    (
+                        "Вы уверены открыть файл?",
+                        "Открытие файла",
+                        MessageBoxButton.YesNo,
+                        MessageBoxImage.Question
+                    )
+                    != MessageBoxResult.Yes
+                )
+                return;
             OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Title = "Открытие файла";
+            openFileDialog.Filter = 
+                "Текстовые файлы(*.txt)|*.txt|"+
+                "Все файлы(*.*)|*.*|"+
+                "C/C++(*.c,*.cpp,*.h,*.hpp,*.hxx,*.cxx)|*.c,*.cpp,*.h,*.hpp,*.hxx,*.cxx|"+
+                "C#(*.cs)|*.cs";
             if ((bool)(openFileDialog.ShowDialog()))
             {
                 FileInfo fileInfo = new FileInfo(openFileDialog.FileName);
@@ -67,8 +80,24 @@ namespace Notebook
 
         private void Save_Button_Click(object sender, RoutedEventArgs e)
         {
+            if (
+                    MessageBox.Show
+                    (
+                        "Вы уверены сохранить текст в файл?", 
+                        "Сохранение",
+                        MessageBoxButton.YesNo,
+                        MessageBoxImage.Question
+                    )
+                    != MessageBoxResult.Yes
+                )
+                return;
             SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Title = "Save a Text File";
+            saveFileDialog.Title = "Сохранение файла";
+            saveFileDialog.Filter =
+                "Текстовые файлы(*.txt)|*.txt|" +
+                "Все файлы(*.*)|*.*|" +
+                "C/C++(*.c,*.cpp,*.h,*.hpp,*.hxx,*.cxx)|*.c,*.cpp,*.h,*.hpp,*.hxx,*.cxx|" +
+                "C#(*.cs)|*.cs";
             saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
             if (saveFileDialog.ShowDialog() == true)

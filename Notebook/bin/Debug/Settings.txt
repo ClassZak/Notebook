@@ -1,7 +1,7 @@
 Consolas
-12
-#FF98FB98
-resources\PutinAndTacker.jpg
-#FF8A2BE2
-False
+8
+#FF008B8B
+F:\Visual_Projects\ClassZak\Development\Notebook\Notebook\Notebook\bin\Debug\resources\PutinAndTacker.jpg
+#FFFFFFFF
+True
 False
