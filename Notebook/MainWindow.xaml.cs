@@ -42,9 +42,9 @@ namespace Notebook
 
         void UpdateElementSettings()
         {
-            this.InputField.FontSize=settings.fontScale;
-            this.InputField.Foreground=settings.foreground;
-            this.InputField.FontFamily=settings.fontFamily;
+            this.InputField.FontSize = settings.fontScale;
+            this.InputField.Foreground = settings.foreground;
+            this.InputField.FontFamily = settings.fontFamily;
             if (settings.IsImageBrush)
                 this.InputField.Background = settings.imageBackground;
             else
@@ -66,18 +66,18 @@ namespace Notebook
                 return;
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Title = "Открытие файла";
-            openFileDialog.Filter = 
-                "Текстовые файлы(*.txt)|*.txt|"+
-                "Все файлы(*.*)|*.*|"+
-                "C/C++(*.c,*.cpp,*.h,*.hpp,*.hxx,*.cxx)|*.c;*.cpp;*.h;*.hpp;*.hxx;*.cxx|"+
+            openFileDialog.Filter =
+                "Текстовые файлы(*.txt)|*.txt|" +
+                "Все файлы(*.*)|*.*|" +
+                "C/C++(*.c,*.cpp,*.h,*.hpp,*.hxx,*.cxx)|*.c;*.cpp;*.h;*.hpp;*.hxx;*.cxx|" +
                 "C#(*.cs)|*.cs";
             if ((bool)(openFileDialog.ShowDialog()))
             {
                 FileInfo fileInfo = new FileInfo(openFileDialog.FileName);
 
-                this.PathField.Text= fileInfo.FullName;
+                this.PathField.Text = fileInfo.FullName;
                 this.Title = MAIN_TITLE + " - " + fileInfo.Name;
-                this.InputField.Text=File.ReadAllText(openFileDialog.FileName);
+                this.InputField.Text = File.ReadAllText(openFileDialog.FileName);
             }
         }
 
@@ -87,7 +87,7 @@ namespace Notebook
             if (
                     MessageBox.Show
                     (
-                        "Вы уверены сохранить текст в файл?", 
+                        "Вы уверены сохранить текст в файл?",
                         "Сохранение",
                         MessageBoxButton.YesNo,
                         MessageBoxImage.Question
@@ -129,8 +129,7 @@ namespace Notebook
         private void Window_Initialized(object sender, EventArgs e)
         {
             UpdateElementSettings();
-            Thread thread = new Thread(PlayBackgroundSound);
-            thread.Start();
+            PlayBackgroundSound();
         }
         void PlayBackgroundSound()
         {
@@ -139,9 +138,9 @@ namespace Notebook
                 SoundPlayer simpleSound = new SoundPlayer(ANTHEM_PATH);
                 simpleSound.PlayLooping();
             }
-            catch(System.IO.FileNotFoundException)
+            catch (System.IO.FileNotFoundException)
             {
-                MessageBox.Show("Гимн не найден(", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Information);
+                CustomMessageBox.Show("Гимн не найден", "Предупреждение");
             }
         }
     }
