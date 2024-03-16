@@ -1,7 +1,8 @@
 Consolas
-13
+12
 #FF000000
-F:\Visual_Projects\ClassZak\Development\Notebook\Notebook\Notebook\bin\Debug\resources\ob55ia08nfyvq9iqi35tzbj0moiw9w5k.jpg
+resources\ob55ia08nfyvq9iqi35tzbj0moiw9w5k.jpg
 #FFFFFFFF
 True
 True
+
