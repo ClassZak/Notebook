@@ -1,7 +1,7 @@
 Consolas
 13
 #FF000000
-F:\Visual_Projects\ClassZak\Development\Notebook\Notebook\Notebook\bin\Debug\resources\ob55ia08nfyvq9iqi35tzbj0moiw9w5k.jpg
+F:\Visual_Projects\ClassZak\Development\Notebook\Notebook\Notebook\bin\Debug\resources\Putin.jpg
 #FFFFFFFF
 True
 True

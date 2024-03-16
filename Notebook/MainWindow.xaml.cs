@@ -16,6 +16,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Drawing;
+using System.Media;
+using System.Threading;
 
 
 
@@ -28,13 +30,15 @@ namespace Notebook
     public partial class MainWindow : Window
     {
         const string MAIN_TITLE = "Блокнот";
+        const string ANTHEM_PATH = @"F:\Visual_Projects\ClassZak\Development\Notebook\Notebook\Notebook\bin\Debug\resources\Music\Russia Anthem.wav";
         public static Settings settings = new Settings();
-
+        SoundPlayer backgroundSoundPlayer = null;
         public MainWindow()
         {
             InitializeComponent();
-            UpdateElementSettings();
         }
+
+
 
         void UpdateElementSettings()
         {
@@ -116,6 +120,29 @@ namespace Notebook
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             settings.SaveSettings();
+        }
+
+
+
+
+
+        private void Window_Initialized(object sender, EventArgs e)
+        {
+            UpdateElementSettings();
+            Thread thread = new Thread(PlayBackgroundSound);
+            thread.Start();
+        }
+        void PlayBackgroundSound()
+        {
+            try
+            {
+                SoundPlayer simpleSound = new SoundPlayer(ANTHEM_PATH);
+                simpleSound.PlayLooping();
+            }
+            catch(System.IO.FileNotFoundException)
+            {
+                MessageBox.Show("Гимн не найден(", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
         }
     }
 }

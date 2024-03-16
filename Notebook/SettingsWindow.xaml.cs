@@ -144,7 +144,7 @@ namespace Notebook
         private void OpenImageButton_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "Изображения(*.png,*.jpg,*.bmp)|*.png;*.jpg;*.bmp";
+            openFileDialog.Filter = "Изображения(*.png,*.jpg,*.bmp,*.jpeg)|*.png;*.jpg;*.bmp;*.jpeg";
 
             bool succesSelected = false;
             while (!succesSelected)
