@@ -1,7 +1,0 @@
-Consolas
-44
-#FF00FFFF
-F:\Visual_Projects\ClassZak\Development\Notebook\Notebook\Notebook\bin\Debug\resources\Putin.jpg
-#FFFFFFFF
-True
-False

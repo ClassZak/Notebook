@@ -24,7 +24,7 @@ namespace Notebook
     /// </summary>
     public partial class SettingsWindow : Window
     {
-        public static Settings settings;
+        public static TextBoxSettings settings;
 
         public SettingsWindow()
         {

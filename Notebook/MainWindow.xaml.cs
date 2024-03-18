@@ -31,7 +31,7 @@ namespace Notebook
     {
         const string MAIN_TITLE = "Блокнот";
         const string ANTHEM_PATH = @"F:\Visual_Projects\ClassZak\Development\Notebook\Notebook\Notebook\bin\Debug\resources\Music\Russia Anthem.wav";
-        public static Settings settings = new Settings();
+        public static TextBoxSettings settings = new TextBoxSettings();
         SoundPlayer backgroundSoundPlayer = null;
         public MainWindow()
         {

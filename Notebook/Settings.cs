@@ -13,7 +13,7 @@ using System.Windows;
 
 namespace Notebook
 {
-    public class Settings
+    public class TextBoxSettings
     {
         public System.Windows.Media.FontFamily fontFamily;
         public uint fontScale;
@@ -25,9 +25,10 @@ namespace Notebook
         public bool IsStretch = true;
         public string imagePath=null;
 
+        const string FileName = "TextBoxSettings.txt";
         public void LoadSettings()
         {
-            if(!File.Exists("Settings.txt"))
+            if(!File.Exists(FileName))
             {
                 fontFamily = new System.Windows.Media.FontFamily("Consolas");
                 fontScale = 12;
@@ -38,7 +39,7 @@ namespace Notebook
                 IsStretch = true;
 
 
-                FileStream fileStream = new FileStream("Settings.txt", FileMode.Create, FileAccess.Write);
+                FileStream fileStream = new FileStream(FileName, FileMode.Create, FileAccess.Write);
                 StreamWriter writer = new StreamWriter(fileStream);
                 writer.WriteLine(fontFamily.ToString());
                 writer.WriteLine(fontScale.ToString());
@@ -51,7 +52,7 @@ namespace Notebook
             }
             else
             {
-                FileStream fileStream = new FileStream("Settings.txt", FileMode.Open, FileAccess.Read);
+                FileStream fileStream = new FileStream(FileName, FileMode.Open, FileAccess.Read);
                 StreamReader streamReader = new StreamReader(fileStream);
                 fontFamily = new System.Windows.Media.FontFamily(streamReader.ReadLine());
                 fontScale=Convert.ToUInt32(streamReader.ReadLine());
@@ -120,7 +121,7 @@ namespace Notebook
         }
         public void SaveSettings()
         {
-            FileStream fileStream = new FileStream("Settings.txt", FileMode.Create, FileAccess.Write);
+            FileStream fileStream = new FileStream(FileName, FileMode.Create, FileAccess.Write);
             StreamWriter writer = new StreamWriter(fileStream);
             writer.WriteLine(fontFamily.ToString());
             writer.WriteLine(fontScale.ToString());
@@ -131,7 +132,7 @@ namespace Notebook
             writer.WriteLine(IsStretch);
             writer.Close();
         }
-        public Settings()
+        public TextBoxSettings()
         {
             try
             {
@@ -141,6 +142,47 @@ namespace Notebook
             {
                 MessageBox.Show(ex.Message, "Неверные настройки!", MessageBoxButton.OK, MessageBoxImage.Error);
                 throw;
+            }
+        }
+    }
+
+
+
+
+    public class MusicSettings
+    {
+        const string FileName = "MusicSettings.txt";
+
+
+        public bool IsPlaying = false;
+        public bool IsPausing = true;
+        public string MusicPath;
+        public float MusicVolume = 1;
+        public double MusicPosition = 0;
+        
+        public MusicSettings()
+        {
+            if(File.Exists(FileName))
+            {
+                FileStream fileStream=new FileStream(FileName,FileMode.Open, FileAccess.Read);
+                StreamReader streamReader= new StreamReader(fileStream);
+                IsPlaying=bool.Parse(streamReader.ReadLine());
+                IsPausing=bool.Parse(streamReader.ReadLine());
+                MusicPath=streamReader.ReadLine();
+                MusicVolume=float.Parse(streamReader.ReadLine());
+                MusicPosition=float.Parse(streamReader.ReadLine());
+                streamReader.Close();
+            }
+            else
+            {
+                FileStream fileStream = new FileStream(FileName, FileMode.Open, FileAccess.Write);
+                StreamWriter streamWriter = new StreamWriter(fileStream);
+                streamWriter.WriteLine(IsPlaying);
+                streamWriter.WriteLine(IsPausing);
+                streamWriter.WriteLine(MusicPath);
+                streamWriter.WriteLine(MusicVolume);
+                streamWriter.WriteLine(MusicPosition);
+                streamWriter.Close();
             }
         }
     }
