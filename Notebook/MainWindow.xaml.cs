@@ -51,7 +51,7 @@ namespace Notebook
                 this.InputField.Background = settings.solidBackground;
         }
 
-        private void Load_Button_Click(object sender, RoutedEventArgs e)
+        private void Load_Menu_Click(object sender, RoutedEventArgs e)
         {
             if (
                     MessageBox.Show
@@ -82,7 +82,7 @@ namespace Notebook
         }
 
 
-        private void Save_Button_Click(object sender, RoutedEventArgs e)
+        private void Save_Menu_Click(object sender, RoutedEventArgs e)
         {
             if (
                     MessageBox.Show
@@ -107,7 +107,11 @@ namespace Notebook
             if (saveFileDialog.ShowDialog() == true)
                 File.WriteAllText(saveFileDialog.FileName, this.InputField.Text);
         }
-        private void Settings_Button_Click(object sender, RoutedEventArgs e)
+        private void MusicSetting_Menu_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void Settings_Menu_Click(object sender, RoutedEventArgs e)
         {
             SettingsWindow.settings = settings;
             SettingsWindow settingsWindow = new SettingsWindow();
@@ -143,5 +147,7 @@ namespace Notebook
                 CustomMessageBox.Show("Гимн не найден", "Предупреждение");
             }
         }
+
+        
     }
 }

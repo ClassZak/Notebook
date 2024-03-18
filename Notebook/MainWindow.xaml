@@ -10,27 +10,40 @@
         MinWidth="285" MinHeight="150"
         Title="Блокнот" Height="450" Width="800">
     <Grid>
+
         <Grid.RowDefinitions>
-            <RowDefinition Height="5"/>
             <RowDefinition Height="20"/>
+            <RowDefinition Height="30"/>
             <RowDefinition Height="40*"/>
         </Grid.RowDefinitions>
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="84"/>
-            <ColumnDefinition Width="84"/>
-            <ColumnDefinition Width="84"/>
-            <ColumnDefinition Width="84*"/>
-        </Grid.ColumnDefinitions>
-
-
-        <TextBox x:Name="PathField"  Grid.Row="1" Grid.Column="3" IsReadOnly="True" Height="20" Margin="10,0,10,0"/>
-        <TextBox x:Name="InputField" Grid.Row="2" Grid.ColumnSpan="4"  Margin="10" AcceptsReturn="True" TextWrapping="NoWrap"  />
-
-
-        <Button Content="Настройки" Width="65" Height="20" Grid.Row="1" Click="Settings_Button_Click"/>
-        <Button Content="Сохранить" Width="65" Height="20" Grid.Row="1" Grid.Column="1" Click="Save_Button_Click"/>
-        <Button Content="Открыть"   Width="65" Height="20" Grid.Row="1" Grid.Column="2" Click="Load_Button_Click"/>
-
+        <Menu 
+            Grid.Row="0"
+            Grid.ColumnSpan="4"
+            VerticalAlignment="Top" 
+            Background="{DynamicResource {x:Static SystemColors.MenuBarBrushKey}}"
+            >
+            <MenuItem Header="Файл">
+                <MenuItem 
+                    Header="Сохранить"
+                    Click="Save_Menu_Click"
+                    />
+                <MenuItem 
+                    Header="Открыть"
+                    Click="Load_Menu_Click"
+                    />
+            </MenuItem>
+            <MenuItem Header="Настройки">
+                <MenuItem
+                    Header="Настройки редактора"
+                    Click="Settings_Menu_Click"
+                    />
+                <MenuItem
+                    Header="Настройки музыки"
+                    Click="MusicSetting_Menu_Click"/>
+            </MenuItem>
+        </Menu>
+        <TextBox x:Name="PathField"  Grid.Row="1" Grid.Column="3" IsReadOnly="True" Margin="5"/>
+        <TextBox x:Name="InputField" Grid.Row="2" Grid.ColumnSpan="4"  Margin="5" AcceptsReturn="True" TextWrapping="NoWrap"  />
     </Grid>
 </Window>
