@@ -59,7 +59,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="MisucPlayer.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -71,6 +70,9 @@
     </Compile>
     <Compile Include="CustomMessageBox.xaml.cs">
       <DependentUpon>CustomMessageBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MusicSettingsWindow.xaml.cs">
+      <DependentUpon>MusicSettingsWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -89,6 +91,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CustomMessageBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MusicSettingsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -123,6 +129,21 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\1674433980_papik-pro-p-tochechnii-risunok-bmp-23.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Pause.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Resume.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Stop.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Load.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Volume.bmp" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

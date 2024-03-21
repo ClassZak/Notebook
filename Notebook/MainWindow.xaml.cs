@@ -30,9 +30,9 @@ namespace Notebook
     public partial class MainWindow : Window
     {
         const string MAIN_TITLE = "Блокнот";
-        const string ANTHEM_PATH = @"F:\Visual_Projects\ClassZak\Development\Notebook\Notebook\Notebook\bin\Debug\resources\Music\Russia Anthem.wav";
         public static TextBoxSettings settings = new TextBoxSettings();
-        SoundPlayer backgroundSoundPlayer = null;
+        public static MusicSettings musicSettings = new MusicSettings();
+        public static MediaPlayer backgroundSoundPlayer = null;
         public MainWindow()
         {
             InitializeComponent();
@@ -109,7 +109,10 @@ namespace Notebook
         }
         private void MusicSetting_Menu_Click(object sender, RoutedEventArgs e)
         {
-
+            MusicSettingsWindow.settings = musicSettings;
+            MusicSettingsWindow musicSettingsWindow = new MusicSettingsWindow();
+            musicSettingsWindow.ShowDialog();
+            musicSettings = MusicSettingsWindow.settings;
         }
         private void Settings_Menu_Click(object sender, RoutedEventArgs e)
         {
@@ -124,6 +127,9 @@ namespace Notebook
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             settings.SaveSettings();
+            try { musicSettings.MusicPosition = backgroundSoundPlayer.Position; } catch (Exception) { }
+            
+            musicSettings.SaveSettings();
         }
 
 
@@ -139,13 +145,26 @@ namespace Notebook
         {
             try
             {
-                SoundPlayer simpleSound = new SoundPlayer(ANTHEM_PATH);
-                simpleSound.PlayLooping();
+                if (!musicSettings.IsPlaying)
+                    return;
+                backgroundSoundPlayer=new MediaPlayer();
+                backgroundSoundPlayer.Open(new Uri(musicSettings.MusicPath));
+                backgroundSoundPlayer.MediaEnded += new EventHandler(MusicLoop);
+
+                backgroundSoundPlayer.Volume=musicSettings.MusicVolume;
+                backgroundSoundPlayer.Position=musicSettings.MusicPosition;
+
+                backgroundSoundPlayer.Play();
             }
-            catch (System.IO.FileNotFoundException)
+            catch (UriFormatException)
             {
-                CustomMessageBox.Show("Гимн не найден", "Предупреждение");
+                CustomMessageBox.Show("Музыка не найдена!", "Предупреждение");
             }
+        }
+        void MusicLoop(object sender, EventArgs eventArgs)
+        {
+            backgroundSoundPlayer.Position = TimeSpan.Zero;
+            //backgroundSoundPlayer.Play();
         }
 
         

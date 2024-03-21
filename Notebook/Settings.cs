@@ -157,33 +157,51 @@ namespace Notebook
         public bool IsPlaying = false;
         public bool IsPausing = true;
         public string MusicPath;
-        public float MusicVolume = 1;
-        public double MusicPosition = 0;
+        public double MusicVolume = 1;
+        public TimeSpan MusicPosition = TimeSpan.Zero;
         
         public MusicSettings()
         {
             if(File.Exists(FileName))
             {
-                FileStream fileStream=new FileStream(FileName,FileMode.Open, FileAccess.Read);
-                StreamReader streamReader= new StreamReader(fileStream);
-                IsPlaying=bool.Parse(streamReader.ReadLine());
-                IsPausing=bool.Parse(streamReader.ReadLine());
-                MusicPath=streamReader.ReadLine();
-                MusicVolume=float.Parse(streamReader.ReadLine());
-                MusicPosition=float.Parse(streamReader.ReadLine());
-                streamReader.Close();
+                try
+                {
+                    FileStream fileStream=new FileStream(FileName,FileMode.Open, FileAccess.Read);
+                    StreamReader streamReader= new StreamReader(fileStream);
+                    IsPlaying=bool.Parse(streamReader.ReadLine());
+                    IsPausing=bool.Parse(streamReader.ReadLine());
+                    MusicPath=streamReader.ReadLine();
+                    MusicVolume=double.Parse(streamReader.ReadLine());
+                    MusicPosition= TimeSpan.FromMilliseconds(double.Parse(streamReader.ReadLine()));
+                    streamReader.Close();
+                }
+                catch(Exception ex)
+                {
+                    CustomMessageBox.Show(ex.Message, "Необработанное исключение!");
+                }
             }
             else
             {
-                FileStream fileStream = new FileStream(FileName, FileMode.Open, FileAccess.Write);
-                StreamWriter streamWriter = new StreamWriter(fileStream);
-                streamWriter.WriteLine(IsPlaying);
-                streamWriter.WriteLine(IsPausing);
-                streamWriter.WriteLine(MusicPath);
-                streamWriter.WriteLine(MusicVolume);
-                streamWriter.WriteLine(MusicPosition);
-                streamWriter.Close();
+                SaveSettings();
             }
+        }
+        public void SaveSettings()
+        {
+            if(!IsPlaying)
+            {
+                MusicPath = string.Empty;
+                MusicPosition = TimeSpan.FromMilliseconds(0);
+                IsPausing = true;
+            }
+
+            FileStream fileStream = new FileStream(FileName, FileMode.Create, FileAccess.Write);
+            StreamWriter streamWriter = new StreamWriter(fileStream);
+            streamWriter.WriteLine(IsPlaying);
+            streamWriter.WriteLine(IsPausing);
+            streamWriter.WriteLine(MusicPath);
+            streamWriter.WriteLine(MusicVolume);
+            streamWriter.WriteLine(MusicPosition.TotalMilliseconds);
+            streamWriter.Close();
         }
     }
 }
