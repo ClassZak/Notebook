@@ -59,6 +59,7 @@ namespace Notebook
             {
                 try
                 {
+                    bool selectedSucces=false;
                     OpenFileDialog openFileDialog = new OpenFileDialog();
                     openFileDialog.Filter = "Музыка и звуки (*.mp3,*.wav,*.wma)|*.mp3;*.wav;*.wma";
                     if (!((bool)(openFileDialog.ShowDialog())))
@@ -69,7 +70,7 @@ namespace Notebook
                         this.StopButton.IsEnabled = this.PlayButton.IsEnabled = true;
                         this.LoadButton.IsEnabled = false;
                         settings.IsPlaying=true;
-                        break;
+                        this.PathLabel.Foreground = new SolidColorBrush(Colors.Black);
                     }
 
                     if (MainWindow.backgroundSoundPlayer == null)
@@ -86,7 +87,6 @@ namespace Notebook
                     settings.MusicPath = openFileDialog.FileName;
                     CheckMusicPath();
                     //Window_Initialized(null, null);
-                    this.PathLabel.Foreground = new SolidColorBrush(Colors.Black);
                     break;
                 }
                 catch(Exception ex)
