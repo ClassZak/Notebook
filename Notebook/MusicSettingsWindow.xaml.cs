@@ -44,8 +44,10 @@ namespace Notebook
         }
         private void Stop_Button_Click(object sender, RoutedEventArgs e)
         {
+            this.PositionLabel.Text = MainWindow.backgroundSoundPlayer.Position.ToString().Substring(0, 8) + "/" + MainWindow.backgroundSoundPlayer.NaturalDuration.ToString().Substring(0, 8);
             MainWindow.backgroundSoundPlayer.Stop();
             this.StopButton.IsEnabled = this.PlayButton.IsEnabled= false;
+            this.PathLabel.Foreground=new SolidColorBrush(Colors.LightGray);
             this.LoadButton.IsEnabled = true;
             settings.IsPausing = false;
             settings.IsPlaying = false;
@@ -66,6 +68,7 @@ namespace Notebook
                         MainWindow.backgroundSoundPlayer.Position=settings.MusicPosition;
                         this.StopButton.IsEnabled = this.PlayButton.IsEnabled = true;
                         this.LoadButton.IsEnabled = false;
+                        settings.IsPlaying=true;
                         break;
                     }
 
@@ -82,7 +85,8 @@ namespace Notebook
 
                     settings.MusicPath = openFileDialog.FileName;
                     CheckMusicPath();
-                    Window_Initialized(null, null);
+                    //Window_Initialized(null, null);
+                    this.PathLabel.Foreground = new SolidColorBrush(Colors.Black);
                     break;
                 }
                 catch(Exception ex)
@@ -128,6 +132,7 @@ namespace Notebook
             while (!MusicSettingsWindow.closed)
             {
                 await Task.Delay(100);
+                if(settings.IsPlaying)
                 this.PositionLabel.Text = MainWindow.backgroundSoundPlayer.Position.ToString().Substring(0,8)+"/"+ MainWindow.backgroundSoundPlayer.NaturalDuration.ToString().Substring(0, 8);
             }
         }
