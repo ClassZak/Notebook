@@ -53,48 +53,55 @@ namespace Notebook
             settings.IsPlaying = false;
             CheckPausing();
         }
-        private void Load_Button_Click(object sender, RoutedEventArgs e)
+        private async void Load_Button_Click(object sender, RoutedEventArgs e)
         {
             do
             {
                 try
                 {
-                    bool selectedSucces=false;
                     OpenFileDialog openFileDialog = new OpenFileDialog();
                     openFileDialog.Filter = "Музыка и звуки (*.mp3,*.wav,*.wma)|*.mp3;*.wav;*.wma";
                     if (!((bool)(openFileDialog.ShowDialog())))
                     {
                         if (MainWindow.backgroundSoundPlayer == null)
                             break;
-                        MainWindow.backgroundSoundPlayer.Position=settings.MusicPosition;
+                        MainWindow.backgroundSoundPlayer.Position = settings.MusicPosition;
                         this.StopButton.IsEnabled = this.PlayButton.IsEnabled = true;
                         this.LoadButton.IsEnabled = false;
-                        settings.IsPlaying=true;
                         this.PathLabel.Foreground = new SolidColorBrush(Colors.Black);
                     }
 
                     if (MainWindow.backgroundSoundPlayer == null)
-                        MainWindow.backgroundSoundPlayer=new MediaPlayer();
-                    MainWindow.backgroundSoundPlayer.Open(new Uri((openFileDialog.FileName==string.Empty)? settings.MusicPath : openFileDialog.FileName));
+                        MainWindow.backgroundSoundPlayer = new MediaPlayer();
+                    MainWindow.backgroundSoundPlayer.Open(new Uri((openFileDialog.FileName == string.Empty) ? settings.MusicPath : openFileDialog.FileName));
                     MainWindow.backgroundSoundPlayer.Position = TimeSpan.MinValue;
+                    MainWindow.backgroundSoundPlayer.Volume = volumeSlider.Value = 1;
                     MainWindow.backgroundSoundPlayer.Play();
                     settings.IsPausing = false;
-                    settings.IsPlaying = true;
                     this.StopButton.IsEnabled = this.PlayButton.IsEnabled = true;
                     this.LoadButton.IsEnabled = false;
                     this.volumeSlider.IsEnabled = true;
 
                     settings.MusicPath = openFileDialog.FileName;
                     CheckMusicPath();
-                    //Window_Initialized(null, null);
+                    this.PathLabel.Foreground = new SolidColorBrush(Colors.Black);
+                    CheckPausing();
+
+                    if (!settings.IsPlaying)
+                    {
+                        settings.IsPlaying = true;
+                        await MusicPositionChecking();
+                    }
+
+                    
                     break;
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
-                    CustomMessageBox.Show("Необработанное исключение!\n\n"+ex.Message,"Ошибка загрузки музыки!");
+                    CustomMessageBox.Show("Необработанное исключение!\n\n" + ex.Message, "Ошибка загрузки музыки!");
                 }
             }
-            while(true);
+            while (true);
 
         }
         private void volumeSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
@@ -159,7 +166,7 @@ namespace Notebook
         private void CheckVolume()
         {
             if(settings.IsPlaying)
-            volumeSlider.Value=settings.MusicVolume=MainWindow.backgroundSoundPlayer.Volume;
+                MainWindow.backgroundSoundPlayer.Volume=volumeSlider.Value=settings.MusicVolume;
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
